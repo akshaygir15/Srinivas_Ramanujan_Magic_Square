@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ramanujan Magic Square</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="shortcut icon"
+      href="./images/icons8-infinity-16.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div class="main-head">
+      <div class="head">
+        <img src="./images/icons8-infinity-50.png" alt="infinty-logo" id="logo" />
+        <h1 id="ramanujanName">Ramanujan's Magic Square</h1>
+      </div>
+    </div>
+    <div class="main-body">
+      <div class="box-birthday">
+        <form action="" method="post">
+          <p id="para-1">
+            The Ramanujan Magic Square is a unique arrangement of numbers with a
+            magical property: every <span>Row</span>, <span>Column</span>, and
+            <span>Diagonal</span> adds up to the same number.
+          </p>
+          <p id="para-2">
+            Ready to calculate your own magic number? Enter your birthday below!
+          </p>
+          <div id="bdaysubmit">
+            <h2>Enter your birthday in the same format:</h2>
+            <input
+              type="text"
+              name="birthday-day"
+              id="bdy-day"
+              pattern="^(3[01]|[12][0-9]|0?[1-9])$"
+              title="Enter a day between 1 and 31"
+              required
+              placeholder="DD"
+            />
+            <input
+              type="text"
+              name="birthday-month"
+              id="bday-month"
+              pattern="^(1[0-2]|[1-9])$"
+              title="Enter a number between 1 and 12"
+              required
+              placeholder="MM"
+            />
+            <input
+              type="text"
+              name="birthday-year-p1"
+              id="bdy-yr1"
+              pattern="^(19|20)$"
+              title="Enter either 19 or 20"
+              required
+              placeholder="CC"
+            />
+            <input
+              type="text"
+              name="birthday-year-p2"
+              id="bdy-yr2"
+              pattern="^[0-9]{2}$"
+              title="Enter a two-digit number between 00 and 99"
+              required
+              placeholder="YY"
+            />
+            <button onclick="magic()">Submit</button>
+          </div>
+          <div id="resborder">
+          <h2 id="text-sms">
+            Your Super Magic Square Number is:
+            <span>
+              <input type="text" name="Super-magic-square" id="smsn" />
+            </span>
+          </h2>
+        </form>
+        <p id="txtCell">
+          Hover over the text below to highlight the numbers in the cells.
+        </p>
+        <div class="def">
+          <div
+            id="r1"
+            onmouseover="changeColor1()"
+            onmouseout="getBackColor1()"
+          >
+            <p>
+              Row 1:
+              <span id="sp1"> </span>
+            </p>
+          </div>
+          <div
+            id="r2"
+            onmouseover="changeColor2()"
+            onmouseout="getBackColor2()"
+          >
+            <p>
+              Row 2:
+              <span id="sp2"> </span>
+            </p>
+          </div>
+          <div
+            id="r3"
+            onmouseover="changeColor3()"
+            onmouseout="getBackColor3()"
+          >
+            <p>
+              Row 3:
+              <span id="sp3"> </span>
+            </p>
+          </div>
+          <div
+            id="r4"
+            onmouseover="changeColor4()"
+            onmouseout="getBackColor4()"
+          >
+            <p>
+              Row 4:
+              <span id="sp4"> </span>
+            </p>
+          </div>
+          <div
+            id="c1"
+            onmouseover="changeColor5()"
+            onmouseout="getBackColor5()"
+          >
+            <p>
+              Column 1:
+              <span id="sp5"> </span>
+            </p>
+          </div>
+          <div
+            id="c2"
+            onmouseover="changeColor6()"
+            onmouseout="getBackColor6()"
+          >
+            <p>
+              Column 2:
+              <span id="sp6"> </span>
+            </p>
+          </div>
+          <div
+            id="c3"
+            onmouseover="changeColor7()"
+            onmouseout="getBackColor7()"
+          >
+            <p>
+              Column 3:
+              <span id="sp7"> </span>
+            </p>
+          </div>
+          <div
+            id="c4"
+            onmouseover="changeColor8()"
+            onmouseout="getBackColor8()"
+          >
+            <p>
+              Column 4:
+              <span id="sp8"> </span>
+            </p>
+          </div>
+          <div
+            id="d1"
+            onmouseover="changeColor9()"
+            onmouseout="getBackColor9()"
+          >
+            <p>
+              Diagonal 1:
+              <span id="sp9"> </span>
+            </p>
+          </div>
+          <div
+            id="d2"
+            onmouseover="changeColor10()"
+            onmouseout="getBackColor10()"
+          >
+            <p>
+              Diagonal 2:
+              <span id="sp10"> </span>
+            </p>
+          </div>
+          <div
+            id="corner4"
+            onmouseover="changeColor11()"
+            onmouseout="getBackColor11()"
+          >
+            <p>
+              Four Corner Elements:
+              <span id="sp11"> </span>
+            </p>
+          </div>
+          <div
+            id="center4"
+            onmouseover="changeColor12()"
+            onmouseout="getBackColor12()"
+          >
+            <p>
+              Four Central Elements:
+              <span id="sp14"> </span>
+            </p>
+          </div>
+          <div
+            id="mid-1"
+            onmouseover="changeColor13()"
+            onmouseout="getBackColor13()"
+          >
+            <p>
+              A2 + A3 + D2 + D3:
+              <span id="sp12"> </span>
+            </p>
+          </div>
+          <div
+            id="mid-2"
+            onmouseover="changeColor14()"
+            onmouseout="getBackColor14()"
+          >
+            <p>
+              B1 + C1 + B4 + C4:
+              <span id="sp13"> </span>
+            </p>
+          </div>
+          <div
+            id="alt1"
+            onmouseover="changeColor15()"
+            onmouseout="getBackColor15()"
+          >
+            <p>
+              A2 + B1 + C4 + D3:
+              <span id="sp15"> </span>
+            </p>
+          </div>
+          <div
+            id="alt2"
+            onmouseover="changeColor16()"
+            onmouseout="getBackColor16()"
+          >
+            <p>
+              A3 + B4 + C1 + D2:
+              <span id="sp16"> </span>
+            </p>
+          </div>
+          <div
+            id="tleft"
+            onmouseover="changeColor17()"
+            onmouseout="getBackColor17()"
+          >
+            <p>
+              A1 + A2 + B1 + B2:
+              <span id="sp17"> </span>
+            </p>
+          </div>
+          <div
+            id="tright"
+            onmouseover="changeColor18()"
+            onmouseout="getBackColor18()"
+          >
+            <p>
+              A3 + A4 + B3 + B4:
+              <span id="sp18"> </span>
+            </p>
+          </div>
+          <div
+            id="bleft"
+            onmouseover="changeColor19()"
+            onmouseout="getBackColor19()"
+          >
+            <p>
+              C1+ C2 + D1 + D2:
+              <span id="sp19"> </span>
+            </p>
+          </div>
+          <div
+            id="bright"
+            onmouseover="changeColor20()"
+            onmouseout="getBackColor20()"
+          >
+            <p>
+              C3+ C4 + D3 + D4:
+              <span id="sp20"> </span>
+            </p>
+          </div>
+          <div
+            id="cleft"
+            onmouseover="changeColor21()"
+            onmouseout="getBackColor21()"
+          >
+            <p>
+              B1+ B2 + C1 + C2:
+              <span id="sp21"> </span>
+            </p>
+          </div>
+          <div
+            id="cright"
+            onmouseover="changeColor22()"
+            onmouseout="getBackColor22()"
+          >
+            <p>
+              B3+ B4 + C3 + C4:
+              <span id="sp22"> </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="rightcontainer">
+        <div id="picandpara">
+          <p id="sr-para">"The essence of mathematics is not to make simple things complicated, but to make complicated things simple." - <span id="sr-span">Srinivasa Ramanujan</span></p>
+          <img src="./images/ramanujan image.png" alt="Ramanujan image" id="sr-pic" />
+        </div>
+        <div class="box-main">
+          <div id="box1">
+            <p id="lt1">A1</p>
+            <input type="text" name="box-1" id="b1" />
+          </div>
+          <div id="box2">
+            <p id="lt2">A2</p>
+            <input type="text" name="box-2" id="b2" />
+          </div>
+          <div id="box3">
+            <p id="lt3">A3</p>
+            <input type="text" name="box-3" id="b3" />
+          </div>
+          <div id="box4">
+            <p id="lt4">A4</p>
+            <input type="text" name="box-4" id="b4" />
+          </div>
+          <div id="box5">
+            <p id="lt5">B1</p>
+            <input type="text" name="box-5" id="b5" />
+          </div>
+          <div id="box6">
+            <p id="lt6">B2</p>
+            <input type="text" name="box-6" id="b6" />
+          </div>
+          <div id="box7">
+            <p id="lt7">B3</p>
+            <input type="text" name="box-7" id="b7" />
+          </div>
+          <div id="box8">
+            <p id="lt8">B4</p>
+            <input type="text" name="box-8" id="b8" />
+          </div>
+          <div id="box9">
+            <p id="lt9">C1</p>
+            <input type="text" name="box-9" id="b9" />
+          </div>
+          <div id="box10">
+            <p id="lt10">C2</p>
+            <input type="text" name="box-10" id="b10" />
+          </div>
+          <div id="box11">
+            <p id="lt11">C3</p>
+            <input type="text" name="box-11" id="b11" />
+          </div>
+          <div id="box12">
+            <p id="lt12">C4</p>
+            <input type="text" name="box-12" id="b12" />
+          </div>
+          <div id="box13">
+            <p id="lt13">D1</p>
+            <input type="text" name="box-13" id="b13" />
+          </div>
+          <div id="box14">
+            <p id="lt14">D2</p>
+            <input type="text" name="box-14" id="b14" />
+          </div>
+          <div id="box15">
+            <p id="lt15">D3</p>
+            <input type="text" name="box-15" id="b15" />
+          </div>
+          <div>
+            <p id="lt16">D4</p>
+            <input type="text" name="box-16" id="b16" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
